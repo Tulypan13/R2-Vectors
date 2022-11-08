@@ -1,0 +1,196 @@
+---
+title: "First R Markdown sheet and R basics"
+author: "Luciano Gabbanelli"
+date: "October 2022"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapse: true
+    smooth_scroll: true
+    theme: journal
+    highlight: kate
+    df_print: paged
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+## Vectors
+
+
+### 1. Vectors
+
+Let us define some **vectors** 
+```{r}
+x <- 1:5;x
+y <- seq(1,5,2);y
+z <- rep(1,5);z
+```
+and operate them
+```{r}
+x+z
+x+y
+x*y
+x*z
+z/x
+
+# Check this!! Look how R works.
+rep(2,6) -> w; w
+y*w
+
+x<y
+w;y; w>y
+w==y
+
+
+class(x)
+class(x+z)
+typeof(y)
+
+2*w
+3+w
+
+```
+
+
+
+### 2. Coercion
+
+```{r}
+y <- c(1.7, "a"); y
+class(y)
+
+y <- c(TRUE, F, 20); y
+class(y)
+
+y <- c(TRUE, F, 20, 'Hi'); y
+class(y)
+
+x <- c("a","b", "c")
+x <- as.numeric(x)
+x
+
+as.logical(c("a","b", "c"))
+```
+
+
+
+### 3. Mind evaluation
+
+```{r}
+seq(6,10, by=0.6)
+seq(6,10, length=6)
+rep(1,6)
+x <- rep(c(6,10),6)
+x;length(x)
+length(rep(6:10,2))
+```
+
+
+
+
+### 4. Even vectors
+
+```{r}
+
+my.vec <- 10:50; my.vec
+my.vec %% 2
+as.logical(my.vec %% 2)
+my.vec[as.logical(my.vec %% 2)]
+
+```
+
+
+
+### 5. Create an odd vector
+
+```{r}
+odd_vector = seq(-9,9, by=2)
+odd_vector
+
+length(odd_vector)
+odd_vector[5]
+odd_vector[-5]
+odd_vector[c(1,5,7)]
+odd_vector[c(-1,-5,-7)]
+
+seq(2,10,2)
+odd_vector[seq(2,10,2)]
+
+seq(-10,-2,2)
+odd_vector[seq(-10,-2,2)]
+-seq(2,10,2)
+odd_vector[-seq(2,10,2)]
+
+odd_vector[odd_vector > 0]
+odd_vector[odd_vector[odd_vector > 0]]
+odd_vector[as.logical(1:10 %% 2)]
+
+!2:11 %% 2
+odd_vector[! 2:11 %% 2]
+
+```
+
+
+
+### 6. Odd and positive
+
+```{r}
+new_vector = odd_vector[odd_vector>0];new_vector
+sum(new_vector)
+cumsum(new_vector)[length(new_vector)]
+
+mean(new_vector)
+prod(new_vector)
+
+range(new_vector)
+typeof(range(new_vector))
+range(new_vector)[1]
+range(new_vector)[2]
+is.vector(new_vector)
+is.atomic(new_vector)
+
+c(odd_vector,new_vector)
+```
+
+
+### 7. Find common elements from multiple vectors
+
+```{r}
+first_vector <-  c(10, 5, -7, -3, 2, 2, -5, 1, 5, 49)
+first_vector
+second_vector <-  c(10, 4, -3, 2, 2, 5, 9, 6, -7, 33)
+
+is.element(5, first_vector)
+# Or
+as.logical(first_vector[first_vector == 5][1])
+as.logical(first_vector[first_vector == 0][1])
+
+
+intersect(first_vector,second_vector)
+
+intersect(intersect(first_vector,second_vector),odd_vector)
+
+```
+
+
+
+
+### 8. Databases colums
+
+```{r}
+x = c(-10, NULL, log10(100), 30, NA)
+sum(x, na.rm=TRUE)
+mean(x, na.rm = T)
+print(prod(x, na.rm=TRUE))
+range(x, na.rm=TRUE)
+
+```
+
+
+
